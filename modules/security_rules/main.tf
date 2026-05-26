@@ -54,7 +54,7 @@ resource "azurerm_firewall_network_rule_collection" "net_rules" {
     name = "Allow-CosmosDB"
     source_addresses = ["10.0.0.0/16", "10.1.0.0/16", "10.2.0.0/16"]
     destination_addresses = ["AzureCosmosDB"]
-    destination_ports = ["443"]
+    destination_ports = ["443", "10255"]
     protocols = ["TCP"]
   }
 
@@ -70,7 +70,7 @@ resource "azurerm_firewall_network_rule_collection" "net_rules" {
     name = "Allow-AppGW-to-VMSS"
     source_addresses = ["10.0.0.0/16", "10.1.0.0/16", "10.2.0.0/16"]
     destination_addresses = ["10.0.0.0/16", "10.1.0.0/16", "10.2.0.0/16"]
-    destination_ports = ["80"]
+    destination_ports = ["80", "10255"]
     protocols = ["TCP"]
   }
 }

@@ -154,8 +154,8 @@ resource "azurerm_application_gateway" "appgw" {
 
 output "public_ip_id" { value = azurerm_public_ip.appgw_pip.id }
 output "backend_address_pool_id_ghee" {
-  value = tolist(azurerm_application_gateway.appgw.backend_address_pool)[0].id
+  value = one([for pool in azurerm_application_gateway.appgw.backend_address_pool : pool.id if pool.name == "pool-ghee"])
 }
 output "backend_address_pool_id_fitness" {
-  value = tolist(azurerm_application_gateway.appgw.backend_address_pool)[1].id
+  value = one([for pool in azurerm_application_gateway.appgw.backend_address_pool : pool.id if pool.name == "pool-fitness"])
 }

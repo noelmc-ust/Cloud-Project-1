@@ -89,7 +89,7 @@ module "compute_vmss_spoke1_ghee" {
   vmss_name           = "vmss-spoke1-ghee"
   subnet_id           = module.network_spoke1.vmss_subnet_id
   appgw_backend_id    = module.gateway_app_spoke1.backend_address_pool_id_ghee
-  bootstrap_script    = base64encode(templatefile("${path.module}/scripts/bootstrap_ghee.sh.tftpl", { MONGODB_URI = module.database.connection_string }))
+  bootstrap_script    = base64encode(templatefile("${path.module}/scripts/bootstrap_ghee.sh.tftpl", { MONGODB_URI = replace(module.database.connection_string, "/?ssl=true", "/restaurant?ssl=true") }))
 }
 
 module "compute_vmss_spoke1_fitness" {
@@ -99,7 +99,7 @@ module "compute_vmss_spoke1_fitness" {
   vmss_name           = "vmss-spoke1-fitness"
   subnet_id           = module.network_spoke1.vmss_subnet_id
   appgw_backend_id    = module.gateway_app_spoke1.backend_address_pool_id_fitness
-  bootstrap_script    = base64encode(templatefile("${path.module}/scripts/bootstrap_fitness.sh.tftpl", { MONGODB_URI = module.database.connection_string }))
+  bootstrap_script    = base64encode(templatefile("${path.module}/scripts/bootstrap_fitness.sh.tftpl", { MONGODB_URI = replace(module.database.connection_string, "/?ssl=true", "/fitness-tracker?ssl=true") }))
 }
 
 module "compute_vmss_spoke2_ghee" {
@@ -109,7 +109,7 @@ module "compute_vmss_spoke2_ghee" {
   vmss_name           = "vmss-spoke2-ghee"
   subnet_id           = module.network_spoke2.vmss_subnet_id
   appgw_backend_id    = module.gateway_app_spoke2.backend_address_pool_id_ghee
-  bootstrap_script    = base64encode(templatefile("${path.module}/scripts/bootstrap_ghee.sh.tftpl", { MONGODB_URI = module.database.connection_string }))
+  bootstrap_script    = base64encode(templatefile("${path.module}/scripts/bootstrap_ghee.sh.tftpl", { MONGODB_URI = replace(module.database.connection_string, "/?ssl=true", "/restaurant?ssl=true") }))
 }
 
 module "compute_vmss_spoke2_fitness" {
@@ -119,7 +119,7 @@ module "compute_vmss_spoke2_fitness" {
   vmss_name           = "vmss-spoke2-fitness"
   subnet_id           = module.network_spoke2.vmss_subnet_id
   appgw_backend_id    = module.gateway_app_spoke2.backend_address_pool_id_fitness
-  bootstrap_script    = base64encode(templatefile("${path.module}/scripts/bootstrap_fitness.sh.tftpl", { MONGODB_URI = module.database.connection_string }))
+  bootstrap_script    = base64encode(templatefile("${path.module}/scripts/bootstrap_fitness.sh.tftpl", { MONGODB_URI = replace(module.database.connection_string, "/?ssl=true", "/fitness-tracker?ssl=true") }))
 }
 
 module "gateway_app_spoke1" {
